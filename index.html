@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e1e1e">
+  <title>Zoro Note</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="app-container">
+    
+    <!-- Top Header: Titlebar & Tab Bar -->
+    <header class="app-header">
+      <div class="tabs-bar-container">
+        <div class="tabs-scroll" id="tabsScroll">
+          <div class="tabs-list" id="tabsList">
+            <!-- Le schede verranno inserite dinamicamente qui -->
+          </div>
+        </div>
+        <button id="btnNewTab" class="icon-btn tab-add-btn" title="Nuova scheda (Ctrl+T)" aria-label="Nuova scheda">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+            <path d="M8 2a.75.75 0 0 1 .75.75v4.5h4.5a.75.75 0 0 1 0 1.5h-4.5v4.5a.75.75 0 0 1-1.5 0v-4.5h-4.5a.75.75 0 0 1 0-1.5h4.5v-4.5A.75.75 0 0 1 8 2z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <button id="btnSettings" class="icon-btn header-btn" title="Impostazioni" aria-label="Impostazioni">
+          <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor">
+            <path d="M7.07 1a1 1 0 0 1 1.86 0l.27.81a1.05 1.05 0 0 0 1.34.66l.81-.27a1 1 0 0 1 1.32 1.32l-.27.81a1.05 1.05 0 0 0 .66 1.34l.81.27a1 1 0 0 1 0 1.86l-.81.27a1.05 1.05 0 0 0-.66 1.34l.27.81a1.05 1.05 0 0 1-1.32 1.32l-.81-.27a1.05 1.05 0 0 0-1.34.66l-.27.81a1.05 1.05 0 0 1-1.86 0l-.27-.81a1.05 1.05 0 0 0-1.34-.66l-.81.27a1.05 1.05 0 0 1-1.32-1.32l.27-.81a1.05 1.05 0 0 0-.66-1.34l-.81-.27a1.05 1.05 0 0 1 0-1.86l.81-.27a1.05 1.05 0 0 0 .66-1.34l-.27-.81a1.05 1.05 0 0 1 1.32-1.32l.81.27a1.05 1.05 0 0 0 1.34-.66l.27-.81zM8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Menu Bar -->
+    <nav class="main-menu-bar">
+      <div class="menu-item" data-menu="fileMenu">
+        <button class="menu-btn" id="menuFileBtn">File</button>
+        <div class="menu-dropdown" id="fileMenu">
+          <div class="menu-entry" data-action="new-tab">
+            <span>Nuova scheda</span><kbd>Ctrl+T</kbd>
+          </div>
+          <div class="menu-entry" data-action="new-window">
+            <span>Nuova finestra</span><kbd>Ctrl+Shift+N</kbd>
+          </div>
+          <div class="menu-entry" data-action="open-file">
+            <span>Apri...</span><kbd>Ctrl+O</kbd>
+          </div>
+          <div class="menu-entry" data-action="save-file">
+            <span>Salva</span><kbd>Ctrl+S</kbd>
+          </div>
+          <div class="menu-entry" data-action="save-as">
+            <span>Salva con nome...</span><kbd>Ctrl+Shift+S</kbd>
+          </div>
+          <div class="menu-entry" data-action="save-all">
+            <span>Salva tutto</span><kbd></kbd>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-entry" data-action="page-setup">
+            <span>Imposta pagina...</span><kbd></kbd>
+          </div>
+          <div class="menu-entry" data-action="print">
+            <span>Stampa...</span><kbd>Ctrl+P</kbd>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-entry" data-action="close-tab">
+            <span>Chiudi scheda</span><kbd>Ctrl+W</kbd>
+          </div>
+          <div class="menu-entry" data-action="close-window">
+            <span>Chiudi finestra</span><kbd>Alt+F4</kbd>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-menu="editMenu">
+        <button class="menu-btn" id="menuEditBtn">Modifica</button>
+        <div class="menu-dropdown" id="editMenu">
+          <div class="menu-entry" data-action="undo">
+            <span>Annulla</span><kbd>Ctrl+Z</kbd>
+          </div>
+          <div class="menu-entry" data-action="redo">
+            <span>Ripeti</span><kbd>Ctrl+Y</kbd>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-entry" data-action="cut">
+            <span>Taglia</span><kbd>Ctrl+X</kbd>
+          </div>
+          <div class="menu-entry" data-action="copy">
+            <span>Copia</span><kbd>Ctrl+C</kbd>
+          </div>
+          <div class="menu-entry" data-action="paste">
+            <span>Incolla</span><kbd>Ctrl+V</kbd>
+          </div>
+          <div class="menu-entry" data-action="delete">
+            <span>Elimina</span><kbd>Canc</kbd>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-entry" data-action="find">
+            <span>Trova...</span><kbd>Ctrl+F</kbd>
+          </div>
+          <div class="menu-entry" data-action="find-next">
+            <span>Trova successivo</span><kbd>F3</kbd>
+          </div>
+          <div class="menu-entry" data-action="find-prev">
+            <span>Trova precedente</span><kbd>Shift+F3</kbd>
+          </div>
+          <div class="menu-entry" data-action="replace">
+            <span>Sostituisci...</span><kbd>Ctrl+H</kbd>
+          </div>
+          <div class="menu-entry" data-action="goto">
+            <span>Vai a...</span><kbd>Ctrl+G</kbd>
+          </div>
+          <div class="menu-separator"></div>
+          <div class="menu-entry" data-action="select-all">
+            <span>Seleziona tutto</span><kbd>Ctrl+A</kbd>
+          </div>
+          <div class="menu-entry" data-action="insert-datetime">
+            <span>Ora/Data</span><kbd>F5</kbd>
+          </div>
+          <div class="menu-entry" data-action="open-font-settings">
+            <span>Carattere...</span><kbd></kbd>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-menu="viewMenu">
+        <button class="menu-btn" id="menuViewBtn">Visualizza</button>
+        <div class="menu-dropdown" id="viewMenu">
+          <div class="menu-submenu-item">
+            <div class="menu-entry">
+              <span>Zoom</span><span class="submenu-arrow">▶</span>
+            </div>
+            <div class="menu-subdropdown">
+              <div class="menu-entry" data-action="zoom-in">
+                <span>Ingrandisci</span><kbd>Ctrl++</kbd>
+              </div>
+              <div class="menu-entry" data-action="zoom-out">
+                <span>Rimpicciolisci</span><kbd>Ctrl+-</kbd>
+              </div>
+              <div class="menu-entry" data-action="zoom-reset">
+                <span>Ripristina zoom</span><kbd>Ctrl+0</kbd>
+              </div>
+            </div>
+          </div>
+          <div class="menu-entry checked-entry" data-action="toggle-statusbar" id="menuToggleStatusBar">
+            <span class="check-mark">✓</span>
+            <span>Barra di stato</span>
+          </div>
+          <div class="menu-entry checked-entry" data-action="toggle-wordwrap" id="menuToggleWordWrap">
+            <span class="check-mark" id="wordWrapCheckMark">✓</span>
+            <span>A capo automatico</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-menu="helpMenu">
+        <button class="menu-btn" id="menuHelpBtn">Guida</button>
+        <div class="menu-dropdown" id="helpMenu">
+          <div class="menu-entry" data-action="open-about">
+            <span>Informazioni su Zoro Note</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Editor Main Workspace -->
+    <main class="editor-workspace">
+      <!-- Find & Replace Floating Fluent Bar -->
+      <div id="findReplaceBar" class="find-replace-bar hidden">
+        <div class="find-replace-row">
+          <div class="input-with-tools">
+            <input type="text" id="findInput" placeholder="Trova" spellcheck="false" autocomplete="off">
+            <span id="findMatchesCount" class="matches-count">0 di 0</span>
+          </div>
+          <button id="btnFindPrev" class="icon-btn tool-btn" title="Precedente (Shift+F3)" aria-label="Precedente">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/></svg>
+          </button>
+          <button id="btnFindNext" class="icon-btn tool-btn" title="Successivo (F3)" aria-label="Successivo">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/></svg>
+          </button>
+          <button id="btnToggleReplaceMode" class="icon-btn tool-btn" title="Mostra/Nascondi Sostituisci" aria-label="Sostituisci">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M4.5 9a.5.5 0 0 1 .5-.5h5.793L8.646 6.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.793 9.5H5a.5.5 0 0 1-.5-.5z"/></svg>
+          </button>
+          <button id="btnCloseFind" class="icon-btn tool-btn close-btn" title="Chiudi (Esc)" aria-label="Chiudi">
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg>
+          </button>
+        </div>
+
+        <div id="replaceRow" class="find-replace-row hidden">
+          <input type="text" id="replaceInput" placeholder="Sostituisci con" spellcheck="false" autocomplete="off">
+          <button id="btnReplaceSingle" class="text-btn">Sostituisci</button>
+          <button id="btnReplaceAll" class="text-btn">Sostituisci tutto</button>
+        </div>
+
+        <div class="find-options-row">
+          <label class="toggle-chip" title="Maiuscole/minuscole">
+            <input type="checkbox" id="chkMatchCase">
+            <span>Aa</span>
+          </label>
+          <label class="toggle-chip" title="Parola intera">
+            <input type="checkbox" id="chkWholeWord">
+            <span>|W|</span>
+          </label>
+          <label class="toggle-chip" title="Espressione regolare">
+            <input type="checkbox" id="chkRegex">
+            <span>.*</span>
+          </label>
+          <label class="toggle-chip" title="Riprendi dall'inizio">
+            <input type="checkbox" id="chkWrapAround" checked>
+            <span>↻ A capo</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Editor Textarea Area -->
+      <div class="text-editor-container">
+        <textarea id="mainTextArea" class="main-text-area" spellcheck="false" placeholder="Inizia a digitare..."></textarea>
+      </div>
+    </main>
+
+    <!-- Bottom Status Bar -->
+    <footer id="statusBar" class="status-bar">
+      <div class="status-section left-section">
+        <span id="statusCursor">Ln 1, Col 1</span>
+        <span class="status-divider">|</span>
+        <span id="statusChars">0 caratteri</span>
+      </div>
+      <div class="status-section right-section">
+        <span id="statusZoom" class="clickable-status" title="Clicca per ripristinare zoom">100%</span>
+        <span class="status-divider">|</span>
+        <span id="statusLineEnding" class="clickable-status" title="Cambia formato fine riga">Windows (CRLF)</span>
+        <span class="status-divider">|</span>
+        <span id="statusEncoding" class="clickable-status" title="Cambia codifica">UTF-8</span>
+      </div>
+    </footer>
+
+    <!-- Hidden File Input for fallback opening -->
+    <input type="file" id="fileInputFallback" style="display:none;" multiple>
+
+    <!-- Modale "Vai a riga" (GotoDialog) -->
+    <div id="gotoModal" class="modal-overlay hidden">
+      <div class="fluent-dialog">
+        <div class="dialog-header">
+          <h3>Vai alla riga</h3>
+        </div>
+        <div class="dialog-body">
+          <label for="gotoLineInput" id="gotoLineLabel">Numero di riga (1 - 1):</label>
+          <input type="number" id="gotoLineInput" min="1" value="1" class="fluent-input">
+        </div>
+        <div class="dialog-footer">
+          <button id="btnGotoConfirm" class="fluent-btn primary-btn">Vai a</button>
+          <button id="btnGotoCancel" class="fluent-btn secondary-btn">Annulla</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modale "Informazioni su Zoro Note" -->
+    <div id="aboutModal" class="modal-overlay hidden">
+      <div class="fluent-dialog about-dialog">
+        <div class="about-header">
+          <img src="icon.svg" alt="Zoro Note Icon" width="64" height="64">
+          <div class="about-title-block">
+            <h2>Zoro Note</h2>
+            <p class="app-version">Versione 1.0.0 (Clean-Room Rebuilt)</p>
+          </div>
+        </div>
+        <div class="about-body">
+          <p>Un editor di testo desktop moderno, leggero e ad alte prestazioni, concepito per un'esperienza pura senza compromessi.</p>
+          <div class="about-specs">
+            <div><strong>Architettura:</strong> Progressive Web App (PWA) Standalone Offline-First</div>
+            <div><strong>Codifiche:</strong> UTF-8, UTF-8 con BOM, UTF-16 LE, ANSI</div>
+            <div><strong>Terminatori di riga:</strong> Windows (CRLF), Unix/Linux (LF), Mac classico (CR)</div>
+            <div><strong>Parità Funzionale:</strong> Schede multiple, ripristino sessione, Trova e Sostituisci Fluent, scorciatoie complete.</div>
+          </div>
+          <p class="copyright-text">Progetto sviluppato da zero nel pieno rispetto dei confini di clean-room reverse engineering. Nessun codice sorgente o risorsa proprietaria Microsoft è inclusa.</p>
+        </div>
+        <div class="dialog-footer">
+          <button id="btnAboutClose" class="fluent-btn primary-btn">Chiudi</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modale "Impostazioni" (NotepadSettingsPage) -->
+    <div id="settingsModal" class="modal-overlay hidden">
+      <div class="fluent-dialog settings-dialog">
+        <div class="dialog-header with-back">
+          <h2>Impostazioni</h2>
+          <button id="btnSettingsClose" class="icon-btn close-btn" title="Chiudi" aria-label="Chiudi">
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854z"/></svg>
+          </button>
+        </div>
+        
+        <div class="settings-scroll-content">
+          <!-- Sezione Tema -->
+          <div class="settings-card">
+            <div class="card-title">Tema dell'applicazione</div>
+            <div class="card-desc">Scegli come visualizzare i colori di Zoro Note</div>
+            <div class="theme-options">
+              <label class="radio-option">
+                <input type="radio" name="appTheme" value="light">
+                <span>Chiaro</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="appTheme" value="dark">
+                <span>Scuro</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="appTheme" value="system" checked>
+                <span>Usa impostazione di sistema</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Sezione Carattere -->
+          <div class="settings-card">
+            <div class="card-title">Carattere</div>
+            <div class="card-desc">Personalizza il font, lo stile e le dimensioni del testo</div>
+            <div class="settings-grid">
+              <div class="setting-field">
+                <label for="fontFamilySelect">Famiglia di caratteri:</label>
+                <select id="fontFamilySelect" class="fluent-select">
+                  <option value="'Segoe UI Variable Text', 'Segoe UI', sans-serif">Segoe UI</option>
+                  <option value="'Cascadia Code', 'Cascadia Mono', Consolas, monospace">Cascadia Code</option>
+                  <option value="Consolas, 'Courier New', monospace" selected>Consolas</option>
+                  <option value="'Courier New', Courier, monospace">Courier New</option>
+                  <option value="monospace">Monospace di sistema</option>
+                </select>
+              </div>
+
+              <div class="setting-field">
+                <label for="fontSizeSelect">Dimensione:</label>
+                <select id="fontSizeSelect" class="fluent-select">
+                  <option value="10">10 pt</option>
+                  <option value="11">11 pt</option>
+                  <option value="12" selected>12 pt</option>
+                  <option value="14">14 pt</option>
+                  <option value="16">16 pt</option>
+                  <option value="18">18 pt</option>
+                  <option value="20">20 pt</option>
+                  <option value="24">24 pt</option>
+                </select>
+              </div>
+            </div>
+            <div class="font-preview" id="fontPreviewBox">
+              Anteprima testo rapida: Il rapido gatto marrone salta sul cane pigro. 0123456789.
+            </div>
+          </div>
+
+          <!-- Sezione Comportamento -->
+          <div class="settings-card">
+            <div class="card-title">Comportamento all'avvio</div>
+            <div class="card-desc">Scegli cosa fare all'avvio di una nuova sessione di Zoro Note</div>
+            <div class="theme-options">
+              <label class="radio-option">
+                <input type="radio" name="startupBehavior" value="restore" checked>
+                <span>Ripristina la sessione precedente (schede e contenuti aperti)</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="startupBehavior" value="new">
+                <span>Apri una nuova scheda vuota</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Sezione A capo automatico -->
+          <div class="settings-card">
+            <div class="card-title">A capo automatico</div>
+            <div class="card-desc">Adatta il testo alla larghezza della finestra</div>
+            <label class="fluent-switch">
+              <input type="checkbox" id="settingsWordWrapToggle" checked>
+              <span class="slider"></span>
+              <span class="switch-label" id="lblWordWrapSwitch">Attivato</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="dialog-footer">
+          <button id="btnSettingsDone" class="fluent-btn primary-btn">Fine</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
